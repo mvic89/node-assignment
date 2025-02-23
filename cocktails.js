@@ -6,18 +6,23 @@ const PORT = '3001';
 http.createServer((req, res) => {
     const fullpath = url.parse(req.url, true);
 
-    // console.log(fullpath)
-
-    // console.log('href: ' + fullpath.href) // /manhattan?rye=ingredients
-    // console.log('pathname: ' + fullpath.pathname) // /manhattan
-    // console.log('search:' + fullpath.search) // ?rye=ingredients
-
     let queries = fullpath.query;
-    // console.log('bourbon: ' + queries.bourbon); //bourbon=ingredients
+
 
     res.writeHead(200, 'Connection successful', {'Content-type': 'text/html'})
     if (req.url === '/') {
         res.write('<h1>Welcome to the Cocktails page!</h1>')
+        res.write('<div><h3>Home: </h3>')
+        res.write('<p>localhost:3001/</p>')
+        res.write('<h3>Routes: </h3>')
+        res.write('<p>localhost:3001/manhattan</p>')
+        res.write('<p>localhost:3001/oldfashioned</p>')
+        res.write('<p>localhost:3001/oldfashioned?bourbon=history</p>')
+        res.write('<p>localhost:3001/oldfashioned?bourbon=ingredients</p>')
+        res.write('<p>localhost:3001/manhattan?rye=history</p>')
+        res.write('<p>localhost:3001/manhattan?rye=ingredients</p>')
+        res.write(`<p>Unfortunately, I've had some problems with the code flow so when you're in the '/manhattan & /oldfashioned' routes, you'll have to comment out 'res.end()' on line 101.
+        Update/refresh the page in order to access the queries url with the external files (& vice versa when you're inside the queries pages and want to go back to '/', '/manhattan' or '/oldfashioned'.) </p></div>`)
         res.write("<a style='margin-right: 16px' href='/manhattan'>Manhattan</a>")
         res.write("<a style='margin-right: 16px' href='/oldfashioned'>The Old Fashioned</a>")
     }
@@ -27,6 +32,7 @@ http.createServer((req, res) => {
         res.write('<h1>Welcome to The Old Fashioned page</h1>')
         res.write("<a style='margin-right: 16px' href='/'>Home</a>")
         res.write("<a style='margin-right: 16px' href='/manhattan'>Manhattan</a>")
+        res.write(`<div><p>Don't forget to comment out res.end()(line 101) and update to access the links below.</p></div>`)
         res.write('<div><p>Here is the history and the ingredients:</p></div>')
         res.write("<a style='margin-right: 16px' href='/oldfashioned?bourbon=history'>History</a>")
         res.write("<a style='margin-right: 16px' href='/oldfashioned?bourbon=ingredients'>Ingredients</a>")
@@ -61,6 +67,7 @@ http.createServer((req, res) => {
         res.write('<h1>Welcome to The Manhattan page</h1>')
         res.write("<a style='margin-right: 16px' href='/'>Home</a>")
         res.write("<a style='margin-right: 16px' href='/oldfashioned'>The Old Fashioned</a>")
+        res.write(`<div><p>Don't forget to comment out res.end()(line 101) and update to access the links below.</p></div>`)
         res.write('<div><p>Here is the history and the ingredients:</p></div>')
         res.write("<a style='margin-right: 16px' href='/manhattan?rye=history'>History</a>")
         res.write("<a style='margin-right: 16px' href='/manhattan?rye=ingredients'>Ingredients</a>")
@@ -93,8 +100,4 @@ http.createServer((req, res) => {
     
     res.end();
 
-
-
-
-    
 }).listen(PORT, () => console.log(`Listening to port: ${PORT}`))
